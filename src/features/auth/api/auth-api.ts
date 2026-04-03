@@ -1,4 +1,4 @@
-import { apiFetch } from "@/src/lib/api";
+import { apiFetch } from "@/src/global/lib/api";
 
 export interface UserProfile {
   id: string;
