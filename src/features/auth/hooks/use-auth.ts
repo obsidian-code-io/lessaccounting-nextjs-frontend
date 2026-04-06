@@ -2,9 +2,9 @@
 
 import { useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { createClient } from "@/src/lib/supabase";
 import { useAuthStore } from "@/src/features/auth/store/auth-store";
 import { fetchProfile, saveTokens } from "@/src/features/auth/api/auth-api";
+import { createClient } from "@/src/global/lib/supabase";
 
 const supabase = createClient();
 
@@ -23,6 +23,11 @@ export function useAuthListener() {
       setSession(session);
       if (session?.provider_token) {
         setProviderToken(session.provider_token);
+        saveTokens(
+          session.access_token,
+          session.provider_token,
+          session.provider_refresh_token ?? undefined
+        ).catch(() => {});
       }
     });
 
