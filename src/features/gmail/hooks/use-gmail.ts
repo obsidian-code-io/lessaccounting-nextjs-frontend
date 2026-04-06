@@ -9,7 +9,7 @@ export function useSyncGmail() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (maxResults = 100) =>
+    mutationFn: (maxResults: number = 100) =>
       syncGmailEmails(session!.access_token, maxResults),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["gmail-emails"] });
